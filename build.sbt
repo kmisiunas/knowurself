@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   ws
 )
 
-libraryDependencies += "com.microsoft.sqlserver" % "sqljdbc4" % "4.0"
+// does not load?!
+//libraryDependencies += "com.microsoft.sqlserver" % "sqljdbc4" % "4.0"
 
 
 libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-compiler" % _ )
