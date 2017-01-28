@@ -1,4 +1,4 @@
-name := """play-getting-started"""
+name := """KnowUrSelf"""
 
 version := "1.0-SNAPSHOT"
 
@@ -12,5 +12,8 @@ libraryDependencies ++= Seq(
   "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
   ws
 )
+
+libraryDependencies += "com.microsoft.sqlserver" % "sqljdbc4" % "4.0"
+
 
 libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-compiler" % _ )
