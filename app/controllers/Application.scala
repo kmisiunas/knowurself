@@ -33,7 +33,7 @@ object Application extends Controller {
     val con = c.getConnection;
     Logger.debug(con.toString)
 
-    if (connection == null){
+    if (con == null){
        Logger.debug("connection is null")
       Ok("did not work")
     }
