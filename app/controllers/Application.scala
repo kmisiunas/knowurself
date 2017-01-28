@@ -19,6 +19,12 @@ object Application extends Controller {
 
   }
 
+  def timeseries(user: Option[String], data: Option[String]) = Action{implicit request =>
+
+
+    Ok(s"User is: $user and the data is $data")
+  }
+
 
   def index = Action {
     Logger.debug("test debug")
@@ -30,16 +36,23 @@ object Application extends Controller {
   def db2 = Action {
 
     val c = new connect.Connect()
-    val con = c.getConnection;
-    Logger.debug(con.toString)
+    val connection = c.getConnection;
+    Logger.debug(connection.toString)
 
-    if (con == null){
-       Logger.debug("connection is null")
-      Ok("did not work")
+    if (connection == null){
+      Logger.debug("connection is null")
+      Ok("FAILED: no connection to database")
     }
     else {
-      con.close()
-      Ok("all good")
+
+      val statement = connection.createStatement()
+      val resultSet = statement.executeQuery("SELECT * FROM users")
+      val users = new Iterator[String] {
+        def hasNext = resultSet.next()
+        def next() = resultSet.getString(1)
+      }.toStream
+      connection.close()
+      Ok("all users: " + users.mkString(", ") )
     }
 //    val connectionString = "jdbc:sqlserver://knowyourself.database.windows.net:1433;database=KnowYourself;user=su@knowyourself;password=!alexandrU97;encrypt=false;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=90;";
 //    val user = "su"
