@@ -10,8 +10,8 @@ import play.api.db._
 
 import play.api.Logger
 
-import java.sql._
-import com.microsoft.sqlserver.jdbc._
+//import java.sql._
+//import com.microsoft.sqlserver.jdbc._
 
 object Application extends Controller {
 
@@ -24,22 +24,22 @@ object Application extends Controller {
 
   def db2 = Action {
 
-    val connectionString = "jdbc:sqlserver://knowyourself.database.windows.net:1433;database=KnowYourself;user=su@knowyourself;password=!alexandrU97;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-    val user = "su@knowyourself"
-    val pass = "!alexandrU97"
-
-    var connection: Connection = null;
-
-    try {
-      connection = DriverManager.getConnection(connectionString, user, pass);
-
-    }
-    catch {
-        case e: Exception => Logger.error(e.getMessage)
-    }
-    if (connection == null){
-      Logger.debug("connection is null")
-    }
+//    val connectionString = "jdbc:sqlserver://knowyourself.database.windows.net:1433;database=KnowYourself;user=su@knowyourself;password=!alexandrU97;encrypt=false;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=90;";
+//    val user = "su"
+//    val pass = "!alexandrU97"
+//
+//    var connection: Connection = null;
+//
+//    try {
+//      connection = DriverManager.getConnection(connectionString, user, pass);
+//
+//    }
+//    catch {
+//        case e: Exception => Logger.error(e.getMessage)
+//    }
+//    if (connection == null){
+//      Logger.debug("connection is null")
+//    }
     //val selectSql = "SELECT * FROM users"
     //val statement = connection.createStatement()
     //Logger.debug(statement.toString)
