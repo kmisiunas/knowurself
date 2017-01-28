@@ -7,13 +7,18 @@ import play.api.Play.current
 
 import play.api.db._
 
-
 import play.api.Logger
 
 //import java.sql._
 //import com.microsoft.sqlserver.jdbc._
 
 object Application extends Controller {
+
+  def user(name: Option[String]) = Action{implicit request =>
+    Ok(s"Name is: $name")
+
+  }
+
 
   def index = Action {
     Logger.debug("test debug")
@@ -24,6 +29,18 @@ object Application extends Controller {
 
   def db2 = Action {
 
+    val c = new connect.Connect()
+    val con = c.getConnection;
+    Logger.debug(con.toString)
+
+    if (connection == null){
+       Logger.debug("connection is null")
+      Ok("did not work")
+    }
+    else {
+      con.close()
+      Ok("all good")
+    }
 //    val connectionString = "jdbc:sqlserver://knowyourself.database.windows.net:1433;database=KnowYourself;user=su@knowyourself;password=!alexandrU97;encrypt=false;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=90;";
 //    val user = "su"
 //    val pass = "!alexandrU97"
@@ -46,7 +63,6 @@ object Application extends Controller {
     //val resultSet = statement.executeQuery(selectSql);
     //resultSet.getString(1)
     //connection.close()
-    Ok("end")
   }
 
 

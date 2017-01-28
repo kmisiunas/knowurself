@@ -6,6 +6,7 @@
 GET     /                           controllers.Application.index
 GET     /db                         controllers.Application.db
 GET     /db2                        controllers.Application.db2
+GET     /user/                     controllers.Application.user(name: Option[String])
 
 
 # Map static resources from the /public folder to the /assets URL path
