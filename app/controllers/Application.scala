@@ -5,12 +5,11 @@ import play.api.mvc._
 import play.api.cache.Cache
 import play.api.Play.current
 
-import play.api.db._
+//import play.api.db._
 
 import play.api.Logger
 
-//import java.sql._
-//import com.microsoft.sqlserver.jdbc._
+import java.sql._
 
 object Application extends Controller {
 
