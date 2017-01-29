@@ -5,9 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /db                         controllers.Application.db
-GET     /db2                        controllers.Application.db2
 GET     /user/                      controllers.Application.user(name: Option[String])
 GET     /user/question              controllers.Application.question(name: Option[String], question: Option[Int])
+GET     /user/task                  controllers.Application.task(name: Option[String], task: Option[Int])
 GET     /data.json                  controllers.Application.timeseries(user: Option[String], question: Option[Int])
 
 

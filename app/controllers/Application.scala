@@ -26,13 +26,22 @@ object Application extends Controller {
   }
 
   def question(name: Option[String], question: Option[Int]) = Action { implicit request =>
-
-
     Ok(views.html.question(
       username = name.getOrElse("None"),
       question = connectivity.Database.getQuestion(question.getOrElse(0)),
       questionNo = question.getOrElse(0),
       analysis = maths.Analyse.basicAnalysis(name.getOrElse("None"), question.getOrElse(0))
+    ))
+  }
+
+  def task(name: Option[String], task: Option[Int]) = Action { implicit request =>
+    val memory = maths.Cashed(name.getOrElse("None"), task.getOrElse(0))
+    Ok(views.html.task(
+      username = name.getOrElse("None"),
+      task = connectivity.Database.getTask(task.getOrElse(0)),
+      taskNo = task.getOrElse(0),
+      cashedCorrelation = memory._1,
+      recommendations = memory._2
     ))
   }
 
@@ -52,54 +61,8 @@ object Application extends Controller {
   }
 
 
-  def db2 = Action {
-
-    val c = new connect.Connect()
-    val connection = c.getConnection;
-    Logger.debug(connection.toString)
-
-    if (connection == null){
-      Logger.debug("connection is null")
-      Ok("FAILED: no connection to database")
-    }
-    else {
-
-      val statement = connection.createStatement()
-      val resultSet = statement.executeQuery("SELECT * FROM users")
-      val users = new Iterator[String] {
-        def hasNext = resultSet.next()
-        def next() = resultSet.getString(1)
-      }.toStream
-      connection.close()
-      Ok("all users: " + users.mkString(", ") )
-    }
-//    val connectionString = "jdbc:sqlserver://knowyourself.database.windows.net:1433;database=KnowYourself;user=su@knowyourself;password=!alexandrU97;encrypt=false;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=90;";
-//    val user = "su"
-//    val pass = "!alexandrU97"
-//
-//    var connection: Connection = null;
-//
-//    try {
-//      connection = DriverManager.getConnection(connectionString, user, pass);
-//
-//    }
-//    catch {
-//        case e: Exception => Logger.error(e.getMessage)
-//    }
-//    if (connection == null){
-//      Logger.debug("connection is null")
-//    }
-    //val selectSql = "SELECT * FROM users"
-    //val statement = connection.createStatement()
-    //Logger.debug(statement.toString)
-    //val resultSet = statement.executeQuery(selectSql);
-    //resultSet.getString(1)
-    //connection.close()
-  }
-
 
   def db = Action {
-
     Ok("users: " + connectivity.Database.getUsers().mkString(", ") )
   }
 }

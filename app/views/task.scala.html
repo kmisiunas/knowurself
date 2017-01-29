@@ -1,0 +1,42 @@
+@(username: String, task: String, taskNo: Int, cashedCorrelation: String, recommendations: List[String])
+
+@main("User") {
+
+
+<div class="container text-center">
+
+  <div class="alert alert-info text-center" role="alert">
+    <a href="http://knowurself.net/user/?name=kmisiunas" class="alert-link">Click here for a demo user to explore the platform</a>.
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3> Task / objective: @task for @username</h3>
+      <hr>
+      @if(cashedCorrelation != null){
+        <img src="@routes.Assets.at("images/@cashedCorrelation")">
+      }
+        <h4  class="text-left">Recommendations:</h4>
+        @for(recommendation <- recommendations){
+        <p>@recommendation</p>
+        }
+
+      <h4  class="text-left">Recommendations:</h4>
+      <p>Need to collect more data, before we can reach conclusions</p>
+
+      <hr>
+    </div>
+  </div> <!-- row -->
+
+  <div class="row">
+    <br><br>
+    <div class="col-md-4">
+      <a type="button" class="btn btn-lg btn-default" href="/user/?name=@username"><span class="glyphicon glyphicon-triangle-left"></span> Back </a>
+    </div>
+  </div>
+
+
+
+</div>
+}

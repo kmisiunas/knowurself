@@ -13,7 +13,7 @@
     <div class="col-md-12">
       <h3><span class="glyphicon glyphicon-info-sign"></span> About @username</h3>
       <br>
-      <h4>Tasks / Objectives:</h4>
+      <h4  class="text-left">Tasks / Objectives:</h4>
       <ul>
         @for(task <- tasks){
         <li class="text-left"><a href="task?name=kmisiunas&task=@task._2">@task._1</a></li>
@@ -24,9 +24,7 @@
   </div> <!-- row -->
   <div class="row">
     <div class="col-md-12">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> About @username</h3>
-      <br>
-      <h4>Questions:</h4>
+      <h4  class="text-left">Questions:</h4>
       <ul>
         @for(question <- questions){
         <li class="text-left"><a href="question?name=kmisiunas&question=@question._2">@question._1</a></li>
