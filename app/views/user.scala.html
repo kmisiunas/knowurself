@@ -1,4 +1,4 @@
-@(username: String, questions: List[(String, Int)])
+@(username: String, questions: List[(String, Int)], tasks: List[(String, Int)])
 
 @main("User") {
 
@@ -12,7 +12,20 @@
   <div class="row">
     <div class="col-md-12">
       <h3><span class="glyphicon glyphicon-info-sign"></span> About @username</h3>
-      <hr>
+      <br>
+      <h4>Tasks / Objectives:</h4>
+      <ul>
+        @for(task <- tasks){
+        <li class="text-left"><a href="task?name=kmisiunas&task=@task._2">@task._1</a></li>
+        }
+      </ul>
+    </div>
+    <hr>
+  </div> <!-- row -->
+  <div class="row">
+    <div class="col-md-12">
+      <h3><span class="glyphicon glyphicon-info-sign"></span> About @username</h3>
+      <br>
       <h4>Questions:</h4>
       <ul>
         @for(question <- questions){
@@ -20,7 +33,7 @@
         }
       </ul>
     </div>
-
+    <hr>
   </div> <!-- row -->
 
 </div>

@@ -16,12 +16,13 @@ import java.sql._
 object Application extends Controller {
 
   def user(name: Option[String]) = Action{implicit request =>
-    val tasks = connectivity.Database.getTasks(name.get)
+    val tasks: List[Int] = connectivity.Database.getTasks(name.get)
     val noTasks: Int = tasks.size
     val questions: Map[Int,String] = connectivity.Database.getQuestions(name.get)
 
+    val taskMap = tasks.map(id => (connectivity.Database.getTask(id), id)).toList
     //Ok(s"The user $name has $noTasks \n\nQuestions:\n\n" + questions.mkString("\n"))
-    Ok(views.html.user(name.getOrElse("None"), questions.toList.map(_.swap)))
+    Ok(views.html.user(name.getOrElse("None"), questions.toList.map(_.swap), taskMap  ))
   }
 
   def question(name: Option[String], question: Option[Int]) = Action { implicit request =>

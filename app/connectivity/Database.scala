@@ -122,6 +122,21 @@ object Database {
   }
 
 
+  def getTask(taskId: Int, statement: Statement): String = {
+    val resultSet = statement.executeQuery(
+      s"SELECT disease_name FROM diseases WHERE id=$taskId"
+    )
+    realize(resultSet).map(_("disease_name").toString).head
+  }
+  def getTask(taskId: Int): String = {
+    val connection =  getConnection()
+    val statement = connection.createStatement()
+    val res = getTask(taskId, statement)
+    statement.close(); connection.close()
+    res
+  }
+
+
   // Add Methods
 
 
