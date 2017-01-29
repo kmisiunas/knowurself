@@ -35,8 +35,6 @@ object Application extends Controller {
 
 
   def index = Action {
-    Logger.debug("test debug")
-    Logger.error("test error")
     Ok(views.html.index(null))
   }
 
