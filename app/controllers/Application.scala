@@ -29,8 +29,8 @@ object Application extends Controller {
 
     Ok(views.html.question(
       username = name.getOrElse("None"),
-      question = ""+question.getOrElse(0),
-      dataLink = "data.json?name="+name.getOrElse("None")+"&question="+question.getOrElse(0),
+      question = connectivity.Database.getQuestion(question.getOrElse(0)),
+      questionNo = question.getOrElse(0),
       mean = "",
       std = "",
       noOfEntries = ""

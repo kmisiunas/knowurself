@@ -1,4 +1,4 @@
-@(username: String, question: String, dataLink: String, mean: String, std: String, noOfEntries: String)
+@(username: String, question: String, questionNo: Int, mean: String, std: String, noOfEntries: String)
 
 @main("User") {
 
@@ -16,7 +16,7 @@ chart: {
 zoomType: 'x'
 },
 title: {
-text: 'No of coffee cups over time'
+text: '@question'
 },
 subtitle: {
 text: document.ontouchstart === undefined ?
@@ -27,7 +27,7 @@ type: 'datetime'
 },
 yAxis: {
 title: {
-    text: 'Coffee cups per day'
+    text: ''
 }
 },
 legend: {
@@ -92,6 +92,7 @@ data: data
   </div> <!-- row -->
 
   <div class="row">
+    <br><br>
     <div class="col-md-4">
       <a type="button" class="btn btn-lg btn-default" href="/user/?name=@username"><span class="glyphicon glyphicon-triangle-left"></span> Back </a>
     </div>

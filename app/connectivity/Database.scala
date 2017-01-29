@@ -113,7 +113,13 @@ object Database {
     )
     realize(resultSet).map(_("question").toString).head
   }
-
+  def getQuestion(questionId: Int): String = {
+    val connection =  getConnection()
+    val statement = connection.createStatement()
+    val res = getQuestion(questionId, statement)
+    statement.close(); connection.close()
+    res
+  }
 
 
   // Add Methods
