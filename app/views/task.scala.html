@@ -15,7 +15,7 @@
       <h3> Task / objective: @task for @username</h3>
       <hr>
       @if(cashedCorrelation != null){
-        <img src="@routes.Assets.at(cashedCorrelation)">
+        <img style="width:400px;" src="@routes.Assets.at(cashedCorrelation)">
       }
         <h4  class="text-left">Recommendations:</h4>
         @for(recommendation <- recommendations){
