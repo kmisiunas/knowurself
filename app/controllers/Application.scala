@@ -20,7 +20,21 @@ object Application extends Controller {
     val noTasks: Int = tasks.size
     val questions: Map[Int,String] = connectivity.Database.getQuestions(name.get)
 
-    Ok(s"The user $name has $noTasks \n\nQuestions:\n\n" + questions.mkString("\n"))
+    //Ok(s"The user $name has $noTasks \n\nQuestions:\n\n" + questions.mkString("\n"))
+    Ok(views.html.user(name.getOrElse("None"), questions.toList.map(_.swap)))
+  }
+
+  def question(name: Option[String], question: Option[Int]) = Action { implicit request =>
+
+
+    Ok(views.html.question(
+      username = name.getOrElse("None"),
+      question = ""+question.getOrElse(0),
+      dataLink = "data.json?name="+name.getOrElse("None")+"&question="+question.getOrElse(0),
+      mean = "",
+      std = "",
+      noOfEntries = ""
+    ))
   }
 
   // json generator

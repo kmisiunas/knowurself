@@ -1,6 +1,6 @@
 {
-  "name": "Start on Heroku: Scala",
-  "description": "A barebones Scala app (using the Play framework), which can easily be deployed to Heroku.",
+  "name": "KnowUrSelf",
+  "description": "Data about you and for you. Make informed decisions!",
   "image": "heroku/scala",
   "addons": [ "heroku-postgresql" ]
 }

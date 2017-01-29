@@ -1,0 +1,104 @@
+@(username: String, question: String, dataLink: String, mean: String, std: String, noOfEntries: String)
+
+@main("User") {
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script>
+    $(function sketch() {
+  $.ajax({
+  dataType: "json",
+  url: 'http://knowurself.net/data.json?user=@username&question=@question',
+  error: function(data){console.log(data)},
+  success: function (data){
+Highcharts.chart('container', {
+chart: {
+zoomType: 'x'
+},
+title: {
+text: 'No of coffee cups over time'
+},
+subtitle: {
+text: document.ontouchstart === undefined ?
+        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+},
+xAxis: {
+type: 'datetime'
+},
+yAxis: {
+title: {
+    text: 'Coffee cups per day'
+}
+},
+legend: {
+enabled: false
+},
+plotOptions: {
+area: {
+    fillColor: {
+        linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 0,
+            y2: 1
+        },
+        stops: [
+            [0, Highcharts.getOptions().colors[0]],
+            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+        ]
+    },
+    marker: {
+        radius: 2
+    },
+    lineWidth: 1,
+    states: {
+        hover: {
+            lineWidth: 1
+        }
+    },
+    threshold: null
+}
+},
+
+series: [{
+type: 'area',
+name: 'Coffee cups per day',
+data: data
+          }]
+      });
+  }
+})});
+  </script>
+
+
+<div class="container text-center">
+
+  <div class="alert alert-info text-center" role="alert">
+    <a href="http://knowurself.net/user/?name=kmisiunas" class="alert-link">A demo user is available to explore the platform</a>.
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3> @question</h3>
+      <hr>
+      <h4>User: @noOfEntries</h4>
+      <h4>Number of entries: @username</h4>
+      <h4>Mean value: @mean</h4>
+      <h4>Standard deviation: @std</h4>
+      <hr>
+      <div id="container" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
+    </div>
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="col-md-4">
+      <a type="button" class="btn btn-lg btn-default" href="/user/?name=@username"><span class="glyphicon glyphicon-triangle-left"></span> Back </a>
+    </div>
+  </div>
+
+
+
+</div>
+
+}
