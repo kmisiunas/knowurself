@@ -62,7 +62,7 @@ object Application extends Controller {
     Ok(views.html.index(
       message = null,
       noUsers = users.size,
-      noQuestions = 10,
+      noQuestions = connectivity.Database.getAnswersNumber(),
       users = users
     ))
   }
