@@ -79,25 +79,7 @@ object Application extends Controller {
 
 
   def db = Action {
-//    var out = ""
-//    val conn = DB.getConnection()
-//    /*
-//    jdbc:sqlserver://knowyourself.database.windows.net:1433;database=KnowYourself;user=su@knowyourself;password=!alexandrU97;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-//     */
-//    try {
-//      val stmt = conn.createStatement
-//
-//      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)")
-//      stmt.executeUpdate("INSERT INTO ticks VALUES (now())")
-//
-//      val rs = stmt.executeQuery("SELECT tick FROM ticks")
-//
-//      while (rs.next) {
-//        out += "Read from DB: " + rs.getTimestamp("tick") + "\n"
-//      }
-//    } finally {
-//      conn.close()
-//    }
-    Ok("nothing")
+
+    Ok("users: " + connectivity.Database.getUsers().mkString(", ") )
   }
 }
