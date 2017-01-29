@@ -141,7 +141,7 @@ object Database {
     val connection =  getConnection()
     val statement = connection.createStatement()
     val resultSet = statement.executeQuery(s"sp_spaceused 'answers'" )
-    realize(resultSet).head.apply("rows").toString.toInt
+    realize(resultSet).head.apply("rows").toString.trim.toInt
   }
 
   // #############   Add Methods   #########
