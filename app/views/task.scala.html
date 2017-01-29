@@ -15,15 +15,12 @@
       <h3> Task / objective: @task for @username</h3>
       <hr>
       @if(cashedCorrelation != null){
-        <img src="@routes.Assets.at("images/@cashedCorrelation")">
+        <img src="@routes.Assets.at(cashedCorrelation)">
       }
         <h4  class="text-left">Recommendations:</h4>
         @for(recommendation <- recommendations){
-        <p>@recommendation</p>
+        <p  class="text-left">@recommendation</p>
         }
-
-      <h4  class="text-left">Recommendations:</h4>
-      <p>Need to collect more data, before we can reach conclusions</p>
 
       <hr>
     </div>
