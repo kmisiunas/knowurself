@@ -31,9 +31,7 @@ object Application extends Controller {
       username = name.getOrElse("None"),
       question = connectivity.Database.getQuestion(question.getOrElse(0)),
       questionNo = question.getOrElse(0),
-      mean = "",
-      std = "",
-      noOfEntries = ""
+      analysis = maths.Analyse.basicAnalysis(name.getOrElse("None"), question.getOrElse(0))
     ))
   }
 

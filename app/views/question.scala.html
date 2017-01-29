@@ -1,4 +1,4 @@
-@(username: String, question: String, questionNo: Int, mean: String, std: String, noOfEntries: String)
+@(username: String, question: String, questionNo: Int, analysis: maths.BasicStats)
 
 @main("User") {
 
@@ -8,7 +8,7 @@
     $(function sketch() {
   $.ajax({
   dataType: "json",
-  url: 'http://knowurself.net/data.json?user=@username&question=@question',
+  url: 'http://knowurself.net/data.json?user=@username&question=@questionNo',
   error: function(data){console.log(data)},
   success: function (data){
 Highcharts.chart('container', {
@@ -82,10 +82,10 @@ data: data
     <div class="col-md-12">
       <h3> @question</h3>
       <hr>
-      <h4>User: @noOfEntries</h4>
-      <h4>Number of entries: @username</h4>
-      <h4>Mean value: @mean</h4>
-      <h4>Standard deviation: @std</h4>
+      <h4>User: @username</h4>
+      <h4>Number of entries: @analysis.n</h4>
+      <h4>Mean value: @analysis.mean</h4>
+      <h4>Standard deviation: @analysis.std</h4>
       <hr>
       <div id="container" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
     </div>
