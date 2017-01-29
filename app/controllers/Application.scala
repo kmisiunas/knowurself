@@ -7,6 +7,8 @@ import play.api.Play.current
 
 //import play.api.db._
 
+import com.github.nscala_time.time.Imports._
+
 import play.api.Logger
 
 import java.sql._
@@ -14,14 +16,21 @@ import java.sql._
 object Application extends Controller {
 
   def user(name: Option[String]) = Action{implicit request =>
-    Ok(s"Name is: $name")
+    val tasks = connectivity.Database.getTasks(name.get)
+    val noTasks: Int = tasks.size
+    val questions: Map[Int,String] = connectivity.Database.getQuestions(name.get)
 
+    Ok(s"The user $name has $noTasks \n\nQuestions:\n\n" + questions.mkString("\n"))
   }
 
-  def timeseries(user: Option[String], data: Option[String]) = Action{implicit request =>
-
-
-    Ok(s"User is: $user and the data is $data")
+  // json generator
+  def timeseries(user: Option[String], question: Option[Int]) = Action{implicit request =>
+    if (user.isEmpty || question.isEmpty){
+      Ok("Error: user and question ")
+    } else {
+      val data:List[(DateTime,Double)] = connectivity.Database.getAnswers(user.get, question.get)
+      Ok( data.map(x => "["+ x._1.getMillis() +", "+ x._2 +"]").mkString("[", ",","]") )
+    }
   }
 
 
