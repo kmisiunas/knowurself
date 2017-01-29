@@ -57,7 +57,14 @@ object Application extends Controller {
 
 
   def index = Action {
-    Ok(views.html.index(null))
+
+    val users = connectivity.Database.getUsers().map(_._2).toList
+    Ok(views.html.index(
+      message = null,
+      noUsers = users.size,
+      noQuestions = 10,
+      users = users
+    ))
   }
 
 
