@@ -1,6 +1,4 @@
-@(message: String)
-@(nousers: Int)
-@(noquestions: Int)
+@(message: String, noUsers: Int, noQuestions: Int, users: List[String])
 
 
 @main("GettingStarted") {
@@ -50,12 +48,9 @@
       </ul>
       <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
       <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-scala">Getting Started with Scala/Play on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-scala">Deploying Scala Apps on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/play-support">Heroku Play Framework Support</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/scala-support">Heroku Scala Support</a></li>
+        @for(user <- users){
+        <li class="text-left"><a href="user/?name=@user">@user</a></li>
+        }
       </ul>
     </div>
   </div> <!-- row -->
